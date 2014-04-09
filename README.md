@@ -26,3 +26,5 @@ You first create a folder where you're going to store your web app files.
     POST = ['send.stmp']
 
 The code is simple, you first import the Spinne module, then you store the root of your web app in the variable `root`, the index of your web app (which will show when you visit host:port/) in `index` and the files where the method is post in `POST`.
+
+`index.html` has been set to the index of your website in `app.py`.
