@@ -31,8 +31,10 @@ You first create a folder where you're going to store your web app files.
     def temp(tmp):
         return Template(tmp).render()
     template = temp
+    s = Server('localhost', 8888)
+    s.run()
 
-The code is simple, you first import the Spinne module and mako template engine, then you store the root of your web app in the variable `root`, the home page of your website (which will show when you visit host:port/) in `home` and the files where the method is post in `POST`, then you define a function with any name you want while making 1 parameter `tmp` which will be used by Spinne and put the function without `()` in the variable `template` which will also be used by Spinne.
+The code is simple, you first import the Spinne module and mako template engine, then you store the root of your web app in the variable `root`, the home page of your website (which will show when you visit host:port/) in `home` and the files where the method is post in `POST`, then you define a function with any name you want while making one argument `tmp` which will be used by Spinne and put the function without `()` in the variable `template` which will also be used by Spinne. The last two lines is where you specify the host and port using the `Server` class then runn is using the `run` method. You can stop the server by clicking `Ctrl-C`.
 
 `home.html` has been set the home page of your website in `app.py`, you can use basic html, css and javascript, here is an example:
 
@@ -101,3 +103,24 @@ Example:
     request.file('name')
 
 The output will be a list containing two values, the first will be the filename, the second will be the file value.
+Cookies
+------
+To make a cookie, use the `response.cookie` function.
+Example:
+
+    response.cookie('copyright', 'aTechs', '/', '25-Jan-2011 18:45:20 GMT', 9999999)
+
+The last two arguments (expires and maxage) aren't required.
+To get a cookie, use the `request.cookie` function.
+Example:
+
+    request.cookie('copyright')
+
+To delete a cookie, use the `response.delete_cookie` function.
+Example:
+
+    response.delete_cookie('copyright')
+
+Contact Us
+======
+If you need any help, would like to make a suggestion or help in development, please contact us through atechsmail@gmail.com.
