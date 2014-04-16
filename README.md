@@ -3,28 +3,101 @@ Spinne
 Spinne is a python 3.x micro web framework. This web framework was built only by python standard libraries and doesn't require the installation of any other library.
 Installation
 ======
-You can download the project directly from this repository.
-Usage
+You can download the project directly from this repository then put the folder in C:/PythonXX/Lib/site-packages where XX is your python version.
+Basic Usage
 ======
 Spinne is easy to use.
 You first create a folder where you're going to store your web app files.
 
     app.py
     /files
-        index.html
+        home.html
         template.stmp
         send.stmp
         /st
             image.png
             video.mp4
 
-`app.py` should include the main code of the website:
+`app.py` should include the main code of the website, the following example will be using mako template enginge, downloaded from [this link][1].
+
+
+  [1]: https://pypi.python.org/pypi/Mako/?:
 
     from Spinne import *
+    from mako.template import Template
     root = './files'
-    index = 'index.html'
+    home = 'home.html'
     POST = ['send.stmp']
+    def temp(tmp):
+        return Template(tmp).render()
+    template = temp
 
-The code is simple, you first import the Spinne module, then you store the root of your web app in the variable `root`, the index of your web app (which will show when you visit host:port/) in `index` and the files where the method is post in `POST`.
+The code is simple, you first import the Spinne module and mako template engine, then you store the root of your web app in the variable `root`, the home page of your website (which will show when you visit host:port/) in `home` and the files where the method is post in `POST`, then you define a function with any name you want while making 1 parameter `tmp` which will be used by Spinne and put the function without `()` in the variable `template` which will also be used by Spinne.
 
-`index.html` has been set to the index of your website in `app.py`.
+`home.html` has been set the home page of your website in `app.py`, you can use basic html, css and javascript, here is an example:
+
+    <html>
+    <head>
+    <title>Home page</title>
+    </head>
+    <body>
+    What would you like to see?
+    <form enctype="multipart/form-data" method="post" action="/send.stmp">
+    <input type="radio" name="choice" value="image" required> An image<br/>
+    <input type="radio" name="choice" value="video" required> A video<br/>
+    <input type="submit" value="Choose">
+    </form>
+    </body>
+    </html>
+
+This is a basic page which is showing the text 'What would you like to see?' and a form which contains two radio buttons, when you submit the form, you will go to `send.smtp` where your input will be used to show content.
+Now you would like to use the inputs to show content on the page, you will need to write this in `send.smtp`:
+
+    <html>
+    <head>
+    <title>Send</title>
+    </head>
+    <body>
+    <%
+    from Spinne import *
+    i = request.form('choice')
+    %if i == 'image':
+        <img src="/st/image.png">
+    %else:
+        <video width="320" height="240" controls>
+        <source src="/st/movie.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+    %endif
+    %>
+    </body>
+    </html>
+
+This is a template, where you can write python code within html, as we mentioned before, we're using make template engine but you're free to use anyother template engine for development, you first get the input by the function `request.form` where you can put the name of the input you want, then according to the input (the radio button chosen), and image or a video will be shown.
+
+Other Functions
+======
+Some other functions used in Spinne.
+Redirection
+------
+To redirect from one page to another, use the `response.redirect` function.
+Example:
+
+    response.redirect('/anotherpage')
+
+Query Strings
+------
+To parse query strings, use the `request.query_strings` function.
+Example:
+
+    request.query_strings()
+    
+If the path is `'/?a=b&b=c&d=e'`, the output will be `{'a': ['b'], 'b': ['c'], 'd': ['e']}`.
+File Input
+------
+To recieve an input as a file, use the `request.file` function.
+Example:
+
+    request.file('name')
+
+The output will be a list containing two values, the first will be the filename, the second will be the file value.
