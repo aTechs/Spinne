@@ -23,17 +23,18 @@ You first create a folder where you're going to store your web app files.
 
   [1]: https://pypi.python.org/pypi/Mako/?:
 
-    from Spinne import *
+    import Spinne
     from mako.template import Template
-    root = './files'
-    home = 'home.html'
-    POST = ['send.stmp']
+    Spinne.root = './files'
+    Spinne.home = 'home.html'
+    Spinne.POST = ['send.stmp']
     def temp(tmp):
         return Template(tmp).render()
-    template = temp
-    s = Server('localhost', 8888)
+    Spinne.template = temp
+    s = Spinne.Server('localhost', 8888)
     s.run()
 
+**Note**: Don't use `from Spinne import *`.<br>
 The code is simple, you first import the Spinne module and mako template engine, then you store the root of your web app in the variable `root`, the home page of your website (which will show when you visit host:port/) in `home` and the files where the method is post in `POST`, then you define a function with any name you want while making one argument `tmp` which will be used by Spinne and put the function without `()` in the variable `template` which will also be used by Spinne. The last two lines is where you specify the host and port using the `Server` class then runn is using the `run` method. You can stop the server by clicking `Ctrl-C`.
 
 `home.html` has been set the home page of your website in `app.py`, you can use basic html, css and javascript, here is an example:
@@ -52,7 +53,7 @@ The code is simple, you first import the Spinne module and mako template engine,
     </body>
     </html>
 
-This is a basic page which is showing the text 'What would you like to see?' and a form which contains two radio buttons, when you submit the form, you will go to `send.smtp` where your input will be used to show content.
+This is a basic page which is showing the text 'What would you like to see?' and a form which contains two radio buttons, when you submit the form, you will go to `send.smtp` where your input will be used to show content.<br/>
 Now you would like to use the inputs to show content on the page, you will need to write this in `send.smtp`:
 
     <html>
@@ -82,14 +83,14 @@ Other Functions
 Some other functions used in Spinne.
 Redirection
 ------
-To redirect from one page to another, use the `response.redirect` function.
+To redirect from one page to another, use the `response.redirect` function.<br>
 Example:
 
     response.redirect('/anotherpage')
 
 Query Strings
 ------
-To parse query strings, use the `request.query_strings` function.
+To parse query strings, use the `request.query_strings` function.<br>
 Example:
 
     request.query_strings()
@@ -97,7 +98,7 @@ Example:
 If the path is `'/?a=b&b=c&d=e'`, the output will be `{'a': ['b'], 'b': ['c'], 'd': ['e']}`.
 File Input
 ------
-To recieve an input as a file, use the `request.file` function.
+To recieve an input as a file, use the `request.file` function.<br>
 Example:
 
     request.file('name')
@@ -105,18 +106,18 @@ Example:
 The output will be a list containing two values, the first will be the filename, the second will be the file value.
 Cookies
 ------
-To make a cookie, use the `response.cookie` function.
+To make a cookie, use the `response.cookie` function.<br>
 Example:
 
     response.cookie('copyright', 'aTechs', '/', '25-Jan-2011 18:45:20 GMT', 9999999)
 
-The last two arguments (expires and maxage) aren't required.
-To get a cookie, use the `request.cookie` function.
+The last two arguments (expires and maxage) aren't required.<br>
+To get a cookie, use the `request.cookie` function.<br>
 Example:
 
     request.cookie('copyright')
 
-To delete a cookie, use the `response.delete_cookie` function.
+To delete a cookie, use the `response.delete_cookie` function.<br>
 Example:
 
     response.delete_cookie('copyright')
