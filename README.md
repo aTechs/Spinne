@@ -26,7 +26,7 @@ You first create a folder where you're going to store your web app files.
     from mako.template import Template
     Spinne.root = './files'
     Spinne.home = 'home.html'
-    Spinne.POST = ['send.stmp']
+    Spinne.POST = ['/send.stmp']
     def temp(tmp):
         return Template(tmp).render()
     Spinne.template = temp
