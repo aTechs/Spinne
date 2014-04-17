@@ -12,7 +12,6 @@ You first create a folder where you're going to store your web app files.
     app.py
     /files
         home.html
-        template.stmp
         send.stmp
         /st
             image.png
