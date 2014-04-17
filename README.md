@@ -3,7 +3,18 @@ Spinne
 Spinne is a python 3.x micro web framework. This web framework was built only by python standard libraries and doesn't require the installation of any other library.
 Installation
 ======
-You can download the project directly from this repository then put the file in C:/PythonXX/Lib/site-packages where XX is your python version.
+You can download the project directly from this repository, run the cmd, change the directory to the folder where `Spinne.py` file is stored and run this command:
+
+    python.exe setup.py install
+    
+or:
+
+    C:/PythonXX/python.exe setup.py install
+Where XX is the python version.<br>
+Try both and test if Spinne is correctly installed by opening python console and typing this:
+
+    import Spinne
+If it runs without any error, then you've correctly installed it, if any error occurs, please contact us with your problem through atechsmail@gmail.com.
 Basic Usage
 ======
 Spinne is easy to use.
