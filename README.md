@@ -61,8 +61,9 @@ Now you would like to use the inputs to show content on the page, you will need 
     </head>
     <body>
     <%
-    from Spinne import *
-    i = request.form('choice')
+    import Spinne
+    i = Spinne.request.form('choice')
+    %>
     %if i == 'image':
         <img src="/st/image.png">
     %else:
@@ -71,7 +72,6 @@ Now you would like to use the inputs to show content on the page, you will need 
         Your browser does not support the video tag.
         </video>
     %endif
-    %>
     </body>
     </html>
 
