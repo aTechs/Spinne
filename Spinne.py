@@ -43,9 +43,7 @@ template = stmp
 
 ## The class which will handle requests
 class Spinne(BaseHTTPRequestHandler):
-    # Get
     def do_GET(self):
-        ## Handler and path set to global to be used later outside of the function
         global Handler, path
         # Setting the handler to self (BaseHTTPRequestHandler)
         Handler = self
@@ -90,11 +88,8 @@ class Spinne(BaseHTTPRequestHandler):
                     return
                 # Change the extension to html (for the content-type)
                 ext = 'html'
-            # Send 200 response (success)
             self.send_response(200)
-            # Send the header (content-type)
             self.send_header('Content-type', 'text/'+ext)
-            # End headers
             self.end_headers()
             # Write the file contents to the web page
             try:
@@ -106,9 +101,7 @@ class Spinne(BaseHTTPRequestHandler):
             # 404 error (File not found)
             self.send_error(404, Error[404])
         return
-    # Post
     def do_POST(self):
-        # Post is the same
         global Handler, path
         Handler = self
         path = self.path
