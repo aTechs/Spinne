@@ -34,12 +34,10 @@ def stmp(tmp):
     return t.template
 
 ## The index file, root of the website and template (can be changed)
-# The file which the path '/' will open
-# The directory which contains the files of the web app
-class config(object):
-    def __init__(root, home):
-        self.root = root
-        self.home = home
+# The directory which contains the files of the web app (root)
+# The file which the path '/' will open (home)
+root = root
+home = home
 # The function for the template
 template = stmp
 
