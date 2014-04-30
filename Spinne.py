@@ -36,8 +36,8 @@ def stmp(tmp):
 ## The index file, root of the website and template (can be changed)
 # The directory which contains the files of the web app (root)
 # The file which the path '/' will open (home)
-root = root
-home = home
+root = './'
+home = 'home.html'
 # The function for the template
 template = stmp
 
