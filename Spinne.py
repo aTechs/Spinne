@@ -14,11 +14,14 @@ from urllib.parse import urlparse, parse_qs
 from http.cookies import SimpleCookie
 # Forms
 from cgi import FieldStorage
+import codecs
+import os
 
 c = SimpleCookie()
 
 # Error handler (displayed in the console)
 Error = {
+    403:'Error: Forbidden.',
     404:'Error: Not found.',
     405:'Error: Method not allowed.',
     500:'Error: Internal server error.'
@@ -59,17 +62,27 @@ class Spinne(BaseHTTPRequestHandler):
         try:
             # If current path is '/', open the home file
             if self.path == '/':
-                file = open(root + '/' + home)
                 filepath = root + '/' + home
+                filepath = os.path.abspath(filepath)
+                if filepath.startswith(os.path.abspath(root)):
+                    file = codecs.open(filepath)
+                else:
+                    self.send_error(403, Error[403])
+                    return
             # If not, open the file path
             else:
-                file = open(root + self.path)
-                filepath = root + self.path
+                filepath = root + '/' + self.path
+                filepath = os.path.abspath(filepath)
+                if filepath.startswith(os.path.abspath(root)):
+                    file = codecs.open(filepath)
+                else:
+                    self.send_error(403, Error[403])
+                    return
             # Read file
             try:
                 c = file.read()
             except UnicodeDecodeError:
-                file = open(filepath, 'rb')
+                file = codecs.open(filepath, 'rb')
                 c = file.read()
             # Close file
             file.close()
@@ -111,15 +124,25 @@ class Spinne(BaseHTTPRequestHandler):
             return
         try:
             if self.path == '/':
-                file = open(root + '/' + home)
                 filepath = root + '/' + home
+                filepath = os.path.abspath(filepath)
+                if filepath.startswith(os.path.abspath(root)):
+                    file = codecs.open(filepath)
+                else:
+                    self.send_error(403, Error[403])
+                    return
             else:
-                file = open(root + self.path)
-                filepath = root + self.path
+                filepath = root + '/' + self.path
+                filepath = os.path.abspath(filepath)
+                if filepath.startswith(os.path.abspath(root)):
+                    file = codecs.open(filepath)
+                else:
+                    self.send_error(403, Error[403])
+                    return
             try:
                 c = file.read()
             except UnicodeDecodeError:
-                file = open(filepath, 'rb')
+                file = codecs.open(filepath, 'rb')
                 c = file.read()
             file.close()
             ext = filepath.split('.')[-1]
