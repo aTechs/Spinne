@@ -251,7 +251,7 @@ class Server(object):
         try:
             s = HTTPServer((self.host, self.port), Spinne)
             print('Starting Spinne server.')
-            print('Version: 1.0')
+            print('Version: 1.0.1')
             print('Copyright: aTechs.')
             print('Serving at (%s, %s).' %(self.host, str(self.port)))
             print('Close the server by Ctrl-C.')
