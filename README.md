@@ -1,6 +1,6 @@
 Spinne
 ======
-Spinne is a python 3.x micro web framework. This web framework was built only by python standard libraries and doesn't require the installation of any other library.
+Spinne is a python 3.x micro web framework. This web framework was built only by python standard libraries.
 Installation
 ======
 You can download the project directly from this repository, run the cmd, change the directory to the folder where `Spinne.py` file is stored and run this command:
@@ -131,6 +131,11 @@ To delete a cookie, use the `response.delete_cookie` function.<br>
 Example:
 
     response.delete_cookie('copyright')
+
+Datebase
+======
+
+To use database with `Spinne`, you should download the libraries like splite3 and pymongo.
 
 Contact Us
 ======
