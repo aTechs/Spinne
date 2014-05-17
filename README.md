@@ -135,7 +135,7 @@ Example:
 Datebase
 ======
 
-To use database with `Spinne`, you should download the libraries like splite3 and pymongo.
+To use database with `Spinne`, you should download the libraries like sqlite3 and pymongo.
 
 Contact Us
 ======
